@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM microsoft/aspnetcore-build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -10,8 +10,8 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # build runtime image
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
-WORKDIR C:/app/bin/Release/netcoreapp2.0/
+FROM microsoft/aspnetcore-build
+WORKDIR /app
 EXPOSE 5000
 COPY . /app/out
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
