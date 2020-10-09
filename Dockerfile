@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore-build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -10,7 +10,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # build runtime image
-FROM microsoft/aspnetcore:2.0
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 WORKDIR C:/app/bin/Release/netcoreapp2.0/
 EXPOSE 5000
 COPY . /app/out
