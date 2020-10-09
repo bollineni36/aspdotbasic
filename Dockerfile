@@ -1,5 +1,5 @@
 FROM microsoft/aspnetcore-build
-WORKDIR C:/app/bin/Release/netcoreapp2.0
+WORKDIR /app
 
 # copy csproj and restore as distinct layers
 COPY *.csproj ./
