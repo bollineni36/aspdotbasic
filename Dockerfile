@@ -1,19 +1,17 @@
-# Sample contents of Dockerfile
- # Stage 1
- FROM microsoft/aspnetcore-build
- WORKDIR /source
+FROM microsoft/aspnetcore-build:2.0
+WORKDIR /app
 
- # caches restore result by copying csproj file separately
- COPY *.csproj .
- RUN dotnet restore
+# copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
 
- # copies the rest of your code
- COPY . .
- RUN dotnet publish --output /app/ --configuration Release
+# copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
 
- # Stage 2
- FROM microsoft/aspnetcore
- WORKDIR /app
- EXPOSE 5000
- COPY . /app
- ENTRYPOINT ["dotnet", "myapp.dll"]
+# build runtime image
+FROM microsoft/aspnetcore:2.0
+WORKDIR /app
+EXPOSE 5000
+COPY . /app/out 
+ENTRYPOINT ["dotnet", "aspnetapp.dll"]
