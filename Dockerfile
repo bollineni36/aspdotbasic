@@ -14,5 +14,5 @@ FROM microsoft/aspnetcore-build
 WORKDIR /app
 EXPOSE 5000
 COPY . /app/out
-WORKDIR C:\app\bin\Release\netcoreapp2.0
+WORKDIR C:/app/bin/Release/netcoreapp2.0
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
