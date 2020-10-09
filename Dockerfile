@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore-build:3.0
+FROM microsoft/aspnetcore-build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
